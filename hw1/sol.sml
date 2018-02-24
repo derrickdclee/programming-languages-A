@@ -24,13 +24,35 @@ fun is_older (date1: int * int * int, date2: int * int * int) =
     end
 
 (* Qn 2 *)
-fun number_in_month (dates: (int*int*int) list, date: int) =
+fun number_in_month (dates: (int*int*int) list, month: int) =
     if null dates
     then 0
-    else let val partial_ans = number_in_month(tl dates, date)
+    else let val partial_ans = number_in_month(tl dates, month)
 	     val first = hd dates
 	 in
-	     if (#2 first) = date
+	     if (#2 first) = month
 	     then 1 + partial_ans
+	     else partial_ans
+	 end
+
+(* Qn 3 *)
+fun number_in_months (dates: (int*int*int) list, months: int list) =
+    if null months
+    then 0
+    else let val partial_ans = number_in_months(dates, tl months)
+	     val how_many_in_first_month = number_in_month(dates, hd months)
+	 in
+	     partial_ans + how_many_in_first_month
+	 end
+	     
+(* Qn 4 *)
+fun dates_in_month (dates: (int*int*int) list, month: int) =
+    if null dates
+    then []
+    else let val partial_ans = dates_in_months(tl dates, month)
+	     val first_date = hd dates
+	 in
+	     if (#2 first_date) = month
+	     then first_date :: partial_ans
 	     else partial_ans
 	 end
