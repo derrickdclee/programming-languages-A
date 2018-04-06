@@ -1,1 +1,1 @@
-Coursera course: Programming Languages Part A
+Coursera course: Programming Languages (Part A)
